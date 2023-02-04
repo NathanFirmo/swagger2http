@@ -1,0 +1,10 @@
+{
+  "accounts": "http://localhost:3333",
+  "awards": "http://localhost:3334",
+  "awards-gateway": "http://localhost:3335",
+  "iam": "http://localhost:3347",
+  "organizations": "http://localhost:3349",
+  "payments": "http://localhost:3348",
+  "resources": "http://localhost:3344",
+  "tricks": "http://localhost:3346"
+}
