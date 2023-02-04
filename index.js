@@ -11,7 +11,11 @@ async function main() {
   )
 
   let currentMapping = JSON.parse(
-    (await fs.promises.readFile('portsMapping.json')).toString()
+    (
+      await fs.promises.readFile(
+        '/home/nathan/Projetos/swagger2http/portsMapping.json'
+      )
+    ).toString()
   )
   const portsMapping = Object.fromEntries(
     apisWithOpenApiSpec.map((api) => {
@@ -23,7 +27,7 @@ async function main() {
   )
 
   await fs.promises.writeFile(
-    'portsMapping.json',
+    '/home/nathan/Projetos/swagger2http/portsMapping.json',
     JSON.stringify(portsMapping, null, 2)
   )
 

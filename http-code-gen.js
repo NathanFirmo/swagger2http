@@ -18,6 +18,7 @@ const swaggerToHttp = async ({ swagger, api = 'auto_generated', host }) => {
         const dto = swagger[componentsName][schemaName][dtoName]
         const payload = resolvePayload(dto, swagger)
 
+        fileData += '\nContent-Type: application/json'
         fileData += '\n\n' + JSON.stringify(payload, null, 2)
       }
 
