@@ -31,7 +31,7 @@ async function main() {
     JSON.stringify(portsMapping, null, 2)
   )
 
-  for (const api of apisWithOpenApiSpec) {
+  for (const api of ['awards-gateway']) {
     const swaggerFile = await fs.promises.readFile(
       icvRoot + apisPath + `/${api}/swagger.json`
     )

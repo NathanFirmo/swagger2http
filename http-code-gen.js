@@ -5,6 +5,11 @@ const swaggerToHttp = async ({ swagger, api = 'auto_generated', host }) => {
 
   for (const [path, pathData] of Object.entries(swagger.paths)) {
     for (const [method, methodData] of Object.entries(pathData)) {
+      const overridableEntities = [...process.argv].splice(2)
+      const shouldOverride = overridableEntities.includes(
+        `${api}_${methodData.operationId}`
+      )
+
       let fileData = ''
       fileData += `# ${methodData.description}\n\n`
       fileData += `${String(method).toUpperCase()} ${host}${path}`
@@ -32,10 +37,15 @@ const swaggerToHttp = async ({ swagger, api = 'auto_generated', host }) => {
         })
       }
 
-      await fs.promises.writeFile(
-        `${workspaceRoot}/http_requests/${api}/${fileName}`,
-        fileData
-      )
+      if (
+        !fs.existsSync(`${workspaceRoot}/http_requests/${api}/${fileName}`) ||
+        shouldOverride
+      ) {
+        await fs.promises.writeFile(
+          `${workspaceRoot}/http_requests/${api}/${fileName}`,
+          fileData
+        )
+      }
     }
   }
 }
