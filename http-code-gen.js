@@ -6,9 +6,9 @@ const swaggerToHttp = async ({ swagger, api = 'auto_generated', host }) => {
   for (const [path, pathData] of Object.entries(swagger.paths)) {
     for (const [method, methodData] of Object.entries(pathData)) {
       const overridableEntities = [...process.argv].splice(2)
-      const shouldOverride = overridableEntities.includes(
-        `${api}_${methodData.operationId}`
-      )
+      const shouldOverride =
+        overridableEntities.includes(`${api}_${methodData.operationId}`) ||
+        process.argv.includes('--all')
 
       let fileData = ''
       fileData += `# ${methodData.description}\n\n`
